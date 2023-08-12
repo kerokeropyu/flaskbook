@@ -1,0 +1,20 @@
+{
+    "condition": {
+        "searchColumns": [
+            "t1.id",
+            "t1.name",
+            "t1.email"
+        ],
+        "searchValue": {
+            "t1.id": {
+                "=": 1
+            },
+            "t1.name": {
+                "=": "test"
+            },
+            "t1.email": {
+                "=": "test@test.com"
+            }
+        }
+    }
+}
