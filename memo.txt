@@ -11,3 +11,7 @@ python3 -m venv venv
 source venv/bin/activate
 仮想環境の無効化
 deactivate
+
+pip install flask-debugtoolbar
+
+pip install flask-mail
