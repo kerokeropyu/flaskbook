@@ -4,3 +4,10 @@
 
 リクエストコンテキストとはリクエストの間、リクエストレベルのデータを利用できるようにするもの
 リクエストレベルのデータにはrequestとsessionがある。
+
+
+python3 -m venv venv
+仮想環境の立ち上げ
+source venv/bin/activate
+仮想環境の無効化
+deactivate
