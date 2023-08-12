@@ -6,14 +6,24 @@ from flask import (
     g, 
     request, 
     redirect, 
-    flash
+    flash,
+    make_response,
+    session
 )
 from email_validator import validate_email, EmailNotValidError
+import logging
+from flask_debugtoolbar import DebugToolbarExtension
 
 # Flaskクラスをインスタンス化する
 app = Flask(__name__)
 # SECRET_KEYを追加する
 app.config["SECRET_KEY"] = "2AZSMss3p5QPbcY2hBsJ"
+# ログレベルを設定する
+app.logger.setLevel(logging.DEBUG)
+# リダイレクトを中断しないようにする
+app.config["DEBUG_TB_INTERCEPT_REDIRECTS"] = False
+# DebugToolBarExtensionにアプリケーションをセットする
+toolbar = DebugToolbarExtension(app)
 @app.route("/", endpoint="index")
 def index():
     return "Hello, Flaskbook!"
@@ -58,7 +68,17 @@ with app.test_request_context("/users?updated=true"):
 # お問い合わせページを表示する
 @app.route("/contact")
 def contact():
-    return render_template("contact.html")
+    # レスポンスオブジェクトを取得する
+    response = make_response(render_template("contact.html"))
+
+    # クッキーを設定する
+    response.set_cookie("flaskbook key", "flaskbook value")
+
+    # セッションを設定する
+    session["username"] = "ichiro"
+    # return render_template("contact.html")
+    # レスポンスオブジェクトを返す
+    return response
 
 # お問い合わせ完了
 @app.route("/contact/complete", methods=["GET", "POST"])
